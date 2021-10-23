@@ -60,6 +60,7 @@ class ViewModelDetail{
             if let item = retreiveLocalData(itemId: itemId){
                 dataRetrived(true, item)
             }
+            videosRetrived(true, retreiveLocalVideoData(itemId: itemId), itemId)
             Connector().getMovieVideos(itemId: itemId, completion: videosRetrived)
             Connector().getMovieDetails(itemId: itemId, completion: dataRetrived)
         break
@@ -67,6 +68,7 @@ class ViewModelDetail{
             if let item = retreiveLocalData(itemId: itemId){
                 dataRetrived(true, item)
             }
+            videosRetrived(true, retreiveLocalVideoData(itemId: itemId), itemId)
             Connector().getSerieVideos(itemId: itemId, completion: videosRetrived)
             Connector().getSerieDetails(itemId: itemId, completion: dataRetrived)
         break

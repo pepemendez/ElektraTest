@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class ViewModelSeason{
     
@@ -17,13 +18,46 @@ class ViewModelSeason{
         }
     }
     
+    func retreiveLocalData(itemId: Int) -> [Season]{
+        let realm = try! Realm()
+        var ids = [Int]()
+        let persisted = realm.objects(PeristedSeasonList.self).filter("itemId == \(itemId)")
+        persisted.forEach { item in
+            print(item.id)
+            ids.append(item.id)
+        }
+        
+        let items = realm.objects(Season.self).filter("id IN %@", ids)
+        
+        return Array(items)
+    }
+    
+    func storeLocalData(itemId: Int, data: [Season]){
+        let realm = try! Realm()
+        data.forEach({
+            item in
+            let persisted = PeristedSeasonList()
+            persisted.itemId = itemId
+            persisted.id = item.id
+            try! realm.write {
+                realm.add(persisted, update: .all)
+                realm.add(item, update: .all)
+            }
+        })
+    }
+    
     func retreiveData(type: ItemType, itemId: Int){
+        dataRetrived(true, retreiveLocalData(itemId: itemId), itemId)
         Connector().getSerieSeasonsDetails(itemId: itemId, completion: dataRetrived)
     }
     
-    func dataRetrived(_ success: Bool, _ response: [Season]){
+    func dataRetrived(_ success: Bool, _ response: [Season], _ itemId: Int){
         if(success){
-            self.data = response
+            DispatchQueue.main.async {
+                self.data = response
+
+                self.storeLocalData(itemId: itemId, data: self.data)
+            }
         }
     }
 }

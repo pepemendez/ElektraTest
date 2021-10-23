@@ -46,6 +46,7 @@
 		3684DE0D27235AE400CC7FD2 /* UICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684DE0C27235AE400CC7FD2 /* UICollectionViewCell.swift */; };
 		3684DE0F2723640500CC7FD2 /* ImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684DE0E2723640500CC7FD2 /* ImageView+URL.swift */; };
 		36E9C0002723F43600E7C4A2 /* StoredVideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E9BFFF2723F43600E7C4A2 /* StoredVideoList.swift */; };
+		36E9C0022723F89A00E7C4A2 /* StoredSeasonList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E9C0012723F89A00E7C4A2 /* StoredSeasonList.swift */; };
 		5901B3D342C8E69C544B541E /* Pods_Series.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF7274E7290DA3411BFC6266 /* Pods_Series.framework */; };
 		A1BC7FAB47DB5E0E59BC8176 /* Pods_Series_SeriesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D88ED5283AFCE15636E4A40 /* Pods_Series_SeriesUITests.framework */; };
 		DBD6B5885C87E0E9B8346232 /* Pods_SeriesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92F93E3D983C8503BA967BA8 /* Pods_SeriesTests.framework */; };
@@ -115,6 +116,7 @@
 		3684DE0C27235AE400CC7FD2 /* UICollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCell.swift; sourceTree = "<group>"; };
 		3684DE0E2723640500CC7FD2 /* ImageView+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView+URL.swift"; sourceTree = "<group>"; };
 		36E9BFFF2723F43600E7C4A2 /* StoredVideoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredVideoList.swift; sourceTree = "<group>"; };
+		36E9C0012723F89A00E7C4A2 /* StoredSeasonList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredSeasonList.swift; sourceTree = "<group>"; };
 		58C8549D3CABD1EE9063DA7D /* Pods-SeriesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeriesTests.debug.xcconfig"; path = "Target Support Files/Pods-SeriesTests/Pods-SeriesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6BABF57481DED5FB71C964EC /* Pods-Series.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Series.debug.xcconfig"; path = "Target Support Files/Pods-Series/Pods-Series.debug.xcconfig"; sourceTree = "<group>"; };
 		6E4274F19FA2F6728F9D5314 /* Pods-SeriesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeriesTests.release.xcconfig"; path = "Target Support Files/Pods-SeriesTests/Pods-SeriesTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			children = (
 				36044EB72723C0BC00C7881C /* ListSeasons.swift */,
 				36044EB92723C0D100C7881C /* Season.swift */,
+				36E9C0012723F89A00E7C4A2 /* StoredSeasonList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				3684DDEE2722915D00CC7FD2 /* ViewModelList.swift in Sources */,
 				3684DDEC272290EE00CC7FD2 /* Item.swift in Sources */,
 				3684DDB8272289B100CC7FD2 /* ViewController.swift in Sources */,
+				36E9C0022723F89A00E7C4A2 /* StoredSeasonList.swift in Sources */,
 				3684DDF12722976C00CC7FD2 /* Endpoints.swift in Sources */,
 				3684DDF527229A4400CC7FD2 /* Router.swift in Sources */,
 				3684DDEA27228EFA00CC7FD2 /* List.swift in Sources */,

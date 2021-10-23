@@ -72,7 +72,7 @@ extension Connector {
         }
     }
     
-    func getSerieSeasonsDetails(itemId: Int,completion: @escaping (_ success: Bool, _ response: [Season]) -> ()){
+    func getSerieSeasonsDetails(itemId: Int,completion: @escaping (_ success: Bool, _ response: [Season], _ itemId: Int) -> ()){
         guard let url = URL(string: String(format: Endpoints.serieDetails, arguments: [String(itemId)])) else { return }
         
         httpRequest(url: url){
@@ -80,9 +80,9 @@ extension Connector {
             do {
                 let decoder = JSONDecoder()
                 let response = try decoder.decode(ListSeasons.self, from: response.data(using: .utf8)!)
-                completion(true, response.seasons)
+                completion(true, response.seasons, itemId)
             } catch let error {
-                completion(false, [])
+                completion(false, [], 0)
                 print("Ha ocurrido un error: \(error.localizedDescription)")
             }
         }

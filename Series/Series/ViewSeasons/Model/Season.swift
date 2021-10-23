@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Season: Codable {
-    let air_date: String?
-    let episode_count: Int
-    let id: Int
-    let name: String
-    var overview: String?
-    let season_number: Int
+class Season: Object, Codable {
+    @Persisted var air_date: String?
+    @Persisted var episode_count: Int
+    @Persisted(primaryKey: true) var id: Int
+    @Persisted var name: String
+    @Persisted var overview: String?
+    @Persisted var season_number: Int
 }

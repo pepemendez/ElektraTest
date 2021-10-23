@@ -27,11 +27,11 @@ struct Endpoints{
     }
     
     public static var movieNowPlaying: String {
-        return domain + "movie/now_playing?api_key=" + API_KEY + "&language=en-US&page=1"
+        return domain + "movie/now_playing?api_key=" + API_KEY + "&language=en-US&page=%@"
     }
     
     public static var moviePopular: String {
-        return domain + "movie/popular?api_key=" + API_KEY + "&language=en-US&page=1"
+        return domain + "movie/popular?api_key=" + API_KEY + "&language=en-US&page=%@"
     }
     
     public static var movieDetails: String {
@@ -51,11 +51,11 @@ struct Endpoints{
     }
     
     public static var serieNowPlaying: String {
-        return domain + "tv/on_the_air?api_key=" + API_KEY + "&language=en-US&page=1"
+        return domain + "tv/on_the_air?api_key=" + API_KEY + "&language=en-US&page=%@"
     }
     
     public static var seriePopular: String {
-        return domain + "tv/popular?api_key=" + API_KEY + "&language=en-US&page=1"
+        return domain + "tv/popular?api_key=" + API_KEY + "&language=en-US&page=%@"
     }
     
 }

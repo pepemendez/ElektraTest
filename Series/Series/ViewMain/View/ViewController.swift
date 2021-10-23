@@ -10,8 +10,12 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    var isUpdating: Bool = false
+
+    var isUpdatingMoviePlaying: Bool = false
+    var isUpdatingMoviePopular: Bool = false
+    var isUpdatingSeriePlaying: Bool = false
+    var isUpdatingSeriePopular: Bool = false
+
     var viewModel = ViewModelList()
     
     override func viewDidLoad() {
@@ -23,17 +27,35 @@ class ViewController: UIViewController {
         
     }
     
+    private func isUpdating() -> Bool{
+        return isUpdatingMoviePlaying || isUpdatingMoviePopular || isUpdatingSeriePlaying || isUpdatingSeriePopular
+    }
+    
     private func retreiveAllData(){
-        self.isUpdating = true
-        
-        self.viewModel.retreiveDataList(type: ItemType.MoviePlaying)
-        self.viewModel.retreiveDataList(type: ItemType.MoviePopular)
-        self.viewModel.retreiveDataList(type: ItemType.SeriePlaying)
-        self.viewModel.retreiveDataList(type: ItemType.SeriePopular)
+        if(!isUpdating()){
+            self.isUpdatingMoviePlaying = true
+            self.isUpdatingMoviePopular = true
+            self.isUpdatingSeriePlaying = true
+            self.isUpdatingSeriePopular = true
+
+            self.viewModel.retreiveDataList(type: ItemType.MoviePlaying)
+            self.viewModel.retreiveDataList(type: ItemType.MoviePopular)
+            self.viewModel.retreiveDataList(type: ItemType.SeriePlaying)
+            self.viewModel.retreiveDataList(type: ItemType.SeriePopular)
+        }
     }
     
     private func retreiveMoreData(type: ItemType){
-        self.isUpdating = true
+        switch type {
+        case .MoviePlaying:
+            self.isUpdatingMoviePlaying = true
+        case .MoviePopular:
+            self.isUpdatingMoviePopular = true
+        case .SeriePlaying:
+            self.isUpdatingSeriePlaying = true
+        case .SeriePopular:
+            self.isUpdatingSeriePopular = true
+        }
 
         self.viewModel.retreiveMoreDataList(type: type)
     }
@@ -48,16 +70,21 @@ class ViewController: UIViewController {
         viewModel.refreshData = {
             [weak self] type in
             DispatchQueue.main.async {
-                self?.isUpdating = false
-                
+                if(!(self?.isUpdating() ?? true)){
+                    self?.tableView.isScrollEnabled = true
+                }
                 switch type{
                     case .MoviePlaying:
+                        self?.isUpdatingMoviePlaying = false
                         self?.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .fade)
                     case .MoviePopular:
+                        self?.isUpdatingMoviePopular = false
                         self?.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .fade)
                     case .SeriePlaying:
+                        self?.isUpdatingSeriePlaying = false
                         self?.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
                     case .SeriePopular:
+                        self?.isUpdatingSeriePopular = false
                         self?.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
                 }
             }
@@ -72,13 +99,13 @@ extension UICollectionView {
         let offset = contentOffset
         reloadData()
         layoutIfNeeded()
-        setContentOffset(CGPoint(x: offset.x + 2300, y: 0), animated: false)
+        setContentOffset(CGPoint(x: offset.x+2300, y: 0), animated: false)
     }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableViewCellMainListDelegate{
     func fetchMore(type: ItemType) {
-        if(!isUpdating){
+        if(!isUpdating()){
             retreiveMoreData(type: type)
         }
     }
@@ -99,8 +126,10 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentYoffset = scrollView.contentOffset.y
       
-        if contentYoffset < -120 && !isUpdating {
+        if contentYoffset < -145 && !isUpdating() {
+            scrollView.isScrollEnabled = false
             retreiveAllData()
+            print(contentYoffset)
         }
     }
     
@@ -140,7 +169,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
             cell.titleLabel.text = "ERROR"
         }
         
-        cell.collectionView.reloadDataWithoutScroll()
+        
+        cell.collectionView.reloadData()
          
         return cell
     }

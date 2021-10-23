@@ -23,7 +23,6 @@ class ViewModelSeason{
         var ids = [Int]()
         let persisted = realm.objects(PeristedSeasonList.self).filter("itemId == \(itemId)")
         persisted.forEach { item in
-            print(item.id)
             ids.append(item.id)
         }
         

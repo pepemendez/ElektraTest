@@ -23,7 +23,6 @@ class ViewModelVideos{
         var ids = [String]()
         let persisted = realm.objects(PeristedVideoList.self).filter("itemId == \(itemId)")
         persisted.forEach { item in
-            print(item.id)
             ids.append(item.id)
         }
         

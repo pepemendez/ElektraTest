@@ -13,13 +13,13 @@ class Connector {
         URLSession.shared.dataTask(with: url){
             (data, response, error) in
             
-            print(url.absoluteURL)
+            //print(url.absoluteURL)
             
             if let data = data, let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode {
                 
                 let message = String(decoding: data, as: UTF8.self)
                 
-                print(message.prefix(100))
+                //print(message.prefix(100))
                 
                 completion(false, response.statusCode, message);
             }

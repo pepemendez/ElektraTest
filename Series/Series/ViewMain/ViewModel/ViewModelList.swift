@@ -46,7 +46,6 @@ class ViewModelList{
         var ids = [Int]()
         let persisted = realm.objects(PeristedList.self).filter("type == \(type.rawValue)")
         persisted.forEach { item in
-            print(item.id)
             ids.append(item.id)
         }
         

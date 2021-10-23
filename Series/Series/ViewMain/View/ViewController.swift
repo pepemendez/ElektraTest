@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     var isUpdatingMoviePopular: Bool = false
     var isUpdatingSeriePlaying: Bool = false
     var isUpdatingSeriePopular: Bool = false
+    
+    var refresh: Bool = true
 
     var viewModel = ViewModelList()
     
@@ -31,21 +33,29 @@ class ViewController: UIViewController {
         return isUpdatingMoviePlaying || isUpdatingMoviePopular || isUpdatingSeriePlaying || isUpdatingSeriePopular
     }
     
+    private func retreiveLocalData(){
+        refresh = true
+        self.viewModel.retreiveLocalDataList(type: ItemType.MoviePlaying)
+        self.viewModel.retreiveLocalDataList(type: ItemType.MoviePopular)
+        self.viewModel.retreiveLocalDataList(type: ItemType.SeriePlaying)
+        self.viewModel.retreiveLocalDataList(type: ItemType.SeriePopular)
+    }
+    
     private func retreiveAllData(){
-        if(!isUpdating()){
-            self.isUpdatingMoviePlaying = true
-            self.isUpdatingMoviePopular = true
-            self.isUpdatingSeriePlaying = true
-            self.isUpdatingSeriePopular = true
+        refresh = true
+        self.isUpdatingMoviePlaying = true
+        self.isUpdatingMoviePopular = true
+        self.isUpdatingSeriePlaying = true
+        self.isUpdatingSeriePopular = true
 
-            self.viewModel.retreiveDataList(type: ItemType.MoviePlaying)
-            self.viewModel.retreiveDataList(type: ItemType.MoviePopular)
-            self.viewModel.retreiveDataList(type: ItemType.SeriePlaying)
-            self.viewModel.retreiveDataList(type: ItemType.SeriePopular)
-        }
+        self.viewModel.retreiveDataList(type: ItemType.MoviePlaying)
+        self.viewModel.retreiveDataList(type: ItemType.MoviePopular)
+        self.viewModel.retreiveDataList(type: ItemType.SeriePlaying)
+        self.viewModel.retreiveDataList(type: ItemType.SeriePopular)
     }
     
     private func retreiveMoreData(type: ItemType){
+        refresh = false
         switch type {
         case .MoviePlaying:
             self.isUpdatingMoviePlaying = true
@@ -62,7 +72,7 @@ class ViewController: UIViewController {
 
     private func configureView(){
         self.title = "Ejercicio técnico"
-        
+        retreiveLocalData()
         retreiveAllData()
     }
     
@@ -70,22 +80,24 @@ class ViewController: UIViewController {
         viewModel.refreshData = {
             [weak self] type in
             DispatchQueue.main.async {
-                if(!(self?.isUpdating() ?? true)){
-                    self?.tableView.isScrollEnabled = true
-                }
+                
                 switch type{
                     case .MoviePlaying:
-                        self?.isUpdatingMoviePlaying = false
                         self?.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .fade)
+                        self?.isUpdatingMoviePlaying = false
                     case .MoviePopular:
-                        self?.isUpdatingMoviePopular = false
                         self?.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .fade)
+                        self?.isUpdatingMoviePopular = false
                     case .SeriePlaying:
-                        self?.isUpdatingSeriePlaying = false
                         self?.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+                        self?.isUpdatingSeriePlaying = false
                     case .SeriePopular:
-                        self?.isUpdatingSeriePopular = false
                         self?.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
+                        self?.isUpdatingSeriePopular = false
+                }
+                
+                if(!(self?.isUpdating() ?? true)){
+                    self?.tableView.isScrollEnabled = true
                 }
             }
         }
@@ -98,8 +110,7 @@ extension UICollectionView {
     func reloadDataWithoutScroll() {
         let offset = contentOffset
         reloadData()
-        layoutIfNeeded()
-        setContentOffset(CGPoint(x: offset.x+2300, y: 0), animated: false)
+        setContentOffset(CGPoint(x: offset.x + 2000, y: 0), animated: false)
     }
 }
 
@@ -169,8 +180,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
             cell.titleLabel.text = "ERROR"
         }
         
-        
-        cell.collectionView.reloadData()
+        if(refresh){
+            cell.collectionView.reloadData()
+            cell.collectionView.setContentOffset(CGPoint(x: 0,y: 0), animated: false)
+        }
+        else{
+            cell.collectionView.reloadDataWithoutScroll()
+        }
          
         return cell
     }

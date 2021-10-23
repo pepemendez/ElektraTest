@@ -97,6 +97,22 @@ class ViewModelList{
         }
     }
     
+    func retreiveLocalDataList(type: ItemType){
+        switch type {
+        case .MoviePlaying:
+            getMovieNowPlayingResponse(true, retreiveLocalData(type: type))
+            break
+        case .MoviePopular:
+            getMoviePopularResponse(true, retreiveLocalData(type: type))
+            break
+        case .SeriePlaying:
+            getSerieNowPlayingResponse(true, retreiveLocalData(type: type))
+            break
+        case .SeriePopular:
+            getSeriePopularResponse(true, retreiveLocalData(type: type))
+            break
+        }
+    }
     
     func retreiveDataList(type: ItemType){
         self.moviePopularIndex = 1
@@ -106,19 +122,15 @@ class ViewModelList{
         
         switch type {
         case .MoviePlaying:
-            getMovieNowPlayingResponse(true, retreiveLocalData(type: type))
             Connector().getMovieNowPlaying(index: 1, completion: getMovieNowPlayingResponse)
             break
         case .MoviePopular:
-            getMoviePopularResponse(true, retreiveLocalData(type: type))
             Connector().getMoviePopular(index: 1, completion: getMoviePopularResponse)
             break
         case .SeriePlaying:
-            getSerieNowPlayingResponse(true, retreiveLocalData(type: type))
             Connector().getSerieNowPlaying(index: 1, completion: getSerieNowPlayingResponse)
             break
         case .SeriePopular:
-            getSeriePopularResponse(true, retreiveLocalData(type: type))
             Connector().getSeriePopular(index: 1, completion: getSeriePopularResponse)
             break
         }

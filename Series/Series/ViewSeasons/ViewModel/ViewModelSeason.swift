@@ -35,7 +35,7 @@ class ViewModelSeason{
     func storeLocalData(itemId: Int, data: [Season]){
         let realm = try! Realm()
         
-        let previousObjects = realm.objects(PeristedSeasonList.self)
+        let previousObjects = realm.objects(PeristedSeasonList.self).filter("itemId == \(itemId)")
         
         try! realm.write{
             realm.delete(previousObjects)

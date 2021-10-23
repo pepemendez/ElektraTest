@@ -35,7 +35,7 @@ class ViewModelVideos{
     func storeLocalData(itemId: Int, data: [Video]){
         let realm = try! Realm()
         
-        let previousObjects = realm.objects(PeristedVideoList.self)
+        let previousObjects = realm.objects(PeristedVideoList.self).filter("itemId == \(itemId)")
         
         try! realm.write{
             realm.delete(previousObjects)

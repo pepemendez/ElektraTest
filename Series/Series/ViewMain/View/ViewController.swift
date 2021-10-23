@@ -26,10 +26,16 @@ class ViewController: UIViewController {
     private func retreiveAllData(){
         self.isUpdating = true
         
-        self.viewModel.retreiveDataList(type: .MoviePlaying)
-        self.viewModel.retreiveDataList(type: .MoviePopular)
-        self.viewModel.retreiveDataList(type: .SeriePlaying)
-        self.viewModel.retreiveDataList(type: .SeriePopular)
+        self.viewModel.retreiveDataList(type: ItemType.MoviePlaying)
+        self.viewModel.retreiveDataList(type: ItemType.MoviePopular)
+        self.viewModel.retreiveDataList(type: ItemType.SeriePlaying)
+        self.viewModel.retreiveDataList(type: ItemType.SeriePopular)
+    }
+    
+    private func retreiveMoreData(type: ItemType){
+        self.isUpdating = true
+
+        self.viewModel.retreiveMoreDataList(type: type)
     }
 
     private func configureView(){
@@ -40,18 +46,43 @@ class ViewController: UIViewController {
     
     private func bind(){
         viewModel.refreshData = {
-            [weak self] () in
+            [weak self] type in
             DispatchQueue.main.async {
                 self?.isUpdating = false
-                self?.tableView.setContentOffset(.zero, animated: true)
-                self?.tableView.reloadData()
+                
+                switch type{
+                    case .MoviePlaying:
+                        self?.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .fade)
+                    case .MoviePopular:
+                        self?.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .fade)
+                    case .SeriePlaying:
+                        self?.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+                    case .SeriePopular:
+                        self?.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
+                }
             }
         }
     }
 
 }
 
+extension UICollectionView {
+
+    func reloadDataWithoutScroll() {
+        let offset = contentOffset
+        reloadData()
+        layoutIfNeeded()
+        setContentOffset(CGPoint(x: offset.x + 2300, y: 0), animated: false)
+    }
+}
+
 extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableViewCellMainListDelegate{
+    func fetchMore(type: ItemType) {
+        if(!isUpdating){
+            retreiveMoreData(type: type)
+        }
+    }
+    
     func tapped(type: ItemType, at: IndexPath) {
         switch type {
         case .MoviePlaying:
@@ -62,8 +93,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
             routeToDetail(type: type, item: viewModel.seriePlayingNow[at.row])
         case .SeriePopular:
             routeToDetail(type: type, item: viewModel.seriePopular[at.row])
-        default:
-            print("ERROR")
         }
     }
     
@@ -110,7 +139,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
         default:
             cell.titleLabel.text = "ERROR"
         }
-        cell.collectionView.reloadData()
+        
+        cell.collectionView.reloadDataWithoutScroll()
          
         return cell
     }

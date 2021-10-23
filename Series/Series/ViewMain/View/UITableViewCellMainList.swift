@@ -9,6 +9,7 @@ import UIKit
 
 protocol UITableViewCellMainListDelegate: class {
     func tapped(type: ItemType, at: IndexPath)
+    func fetchMore(type: ItemType)
 }
 
 class UITableViewCellMainList: UITableViewCell{
@@ -27,6 +28,19 @@ extension UITableViewCellMainList: UICollectionViewCellMainDelegate {
     }
 }
 
+extension UITableViewCellMainList: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentXoffset = scrollView.contentOffset.x
+        let width = scrollView.frame.size.width
+        let distanceFromBottom = scrollView.contentSize.width - contentXoffset
+
+        //print(contentXoffset, width, distanceFromBottom)
+        if distanceFromBottom == width {
+            self.delegate?.fetchMore(type: type)
+        }
+    }
+}
+
 extension UITableViewCellMainList: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -35,7 +49,13 @@ extension UITableViewCellMainList: UICollectionViewDataSource {
             
             let object = data[indexPath.row]
             
-            cell.image.imageFromUrlAndSize(urlString: Endpoints.imagesSmall + object.poster_path)
+            if let poster = object.poster_path{
+                cell.image.imageFromUrlAndSize(urlString: Endpoints.imagesSmall + poster)
+            }
+            else{
+                cell.image.image = UIImage(#imageLiteral(resourceName: "splash_bg"))
+
+            }
             cell.configure(indexPath: indexPath)
             cell.delegate = self
                         
@@ -46,7 +66,12 @@ extension UITableViewCellMainList: UICollectionViewDataSource {
             
             let object = data[indexPath.row]
             
-            cell.image.imageFromUrlAndSize(urlString: Endpoints.imagesSmall + object.poster_path)
+            if let poster = object.poster_path{
+                cell.image.imageFromUrlAndSize(urlString: Endpoints.imagesSmall + poster)
+            }
+            else{
+                cell.image.image = UIImage(#imageLiteral(resourceName: "splash_bg"))
+            }
             cell.configure(indexPath: indexPath)
             cell.delegate = self
 

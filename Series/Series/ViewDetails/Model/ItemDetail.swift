@@ -13,7 +13,7 @@ class ItemDetail: Object, Codable {
     @Persisted var original_title: String?
     @Persisted var name: String?
     @Persisted var overview: String
-    @Persisted var poster_path: String
+    @Persisted var poster_path: String?
     @Persisted(primaryKey: true) var id: Int
     @Persisted var vote_average: Float
     @Persisted var first_air_date: String?

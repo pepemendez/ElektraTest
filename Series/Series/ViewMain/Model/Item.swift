@@ -11,7 +11,7 @@ import RealmSwift
 class Item: Object, Codable {
     @Persisted var original_title: String?
     @Persisted var name: String?
-    @Persisted var overview: String
-    @Persisted var poster_path: String
+    @Persisted var overview: String?
+    @Persisted var poster_path: String?
     @Persisted(primaryKey: true) var id: Int
 }

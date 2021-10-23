@@ -51,8 +51,14 @@ class DetailsViewController: UIViewController {
             DispatchQueue.main.async {
                 let backdrop = self?.viewModel.data.backdrop_path ?? ""
                 let url = backdrop.isEmpty ? self?.viewModel.data.poster_path : backdrop
-                self?.image.imageFromUrl(urlString: Endpoints.images + url! )
                 
+                if let poster = url{
+                    self?.image.imageFromUrl(urlString: Endpoints.images + poster )
+                }
+                else{
+                    self?.image.image = UIImage(#imageLiteral(resourceName: "splash_bg"))
+                }
+                                
                 self?.tableView.setContentOffset(.zero, animated: true)
                 self?.tableView.reloadData()
             }
@@ -97,7 +103,13 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
             let backdrop = object.backdrop_path ?? ""
             let url = backdrop.isEmpty ? object.poster_path : backdrop
           
-            cell.img.imageFromUrl(urlString: Endpoints.imagesSmall + url )
+            if let poster = url{
+                cell.img.imageFromUrl(urlString: Endpoints.imagesSmall + poster )
+            }
+            else{
+                cell.img.image = nil
+            }
+            
 
             if let title = object.original_title, !title.isEmpty{
                 cell.title?.text = title
@@ -188,10 +200,6 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.text = object.overview
             
-            return cell
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "detailsCell")!
-            cell.textLabel?.text = "ERROR"
             return cell
         }
         

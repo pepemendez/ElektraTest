@@ -72,8 +72,6 @@ class ViewModelDetail{
             Connector().getSerieVideos(itemId: itemId, completion: videosRetrived)
             Connector().getSerieDetails(itemId: itemId, completion: dataRetrived)
         break
-        default:
-            print("ERROR")
         }
 
     }

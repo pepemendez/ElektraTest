@@ -61,8 +61,6 @@ class ViewModelVideos{
         case .SeriePopular, .SeriePlaying:
             videosRetrived(true, retreiveLocalData(itemId: itemId), itemId)
             Connector().getSerieVideos(itemId: itemId, completion: videosRetrived)
-        default:
-            print("ERROR")
         }
 
     }

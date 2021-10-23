@@ -88,8 +88,8 @@ extension Connector {
         }
     }
     
-    func getMovieNowPlaying(completion: @escaping (_ success: Bool, _ response: [Item]) -> ()){
-        guard let url = URL(string: Endpoints.movieNowPlaying) else { return }
+    func getMovieNowPlaying(index: Int, completion: @escaping (_ success: Bool, _ response: [Item]) -> ()){
+        guard let url = URL(string: String(format: Endpoints.movieNowPlaying, arguments: [String(index)])) else { return }
         
         httpRequest(url: url){
             success,_,response in
@@ -104,9 +104,9 @@ extension Connector {
         }
     }
     
-    func getMoviePopular(completion: @escaping (_ success: Bool, _ response: [Item]) -> ()){
-        guard let url = URL(string: Endpoints.moviePopular) else { return }
-        
+    func getMoviePopular(index: Int, completion: @escaping (_ success: Bool, _ response: [Item]) -> ()){
+        guard let url = URL(string: String(format: Endpoints.moviePopular, arguments: [String(index)])) else { return }
+
         httpRequest(url: url){
             success,_,response in
             do {
@@ -120,9 +120,9 @@ extension Connector {
         }
     }
     
-    func getSerieNowPlaying(completion: @escaping (_ success: Bool, _ response: [Item]) -> ()){
-        guard let url = URL(string: Endpoints.serieNowPlaying) else { return }
-        
+    func getSerieNowPlaying(index: Int, completion: @escaping (_ success: Bool, _ response: [Item]) -> ()){
+        guard let url = URL(string: String(format: Endpoints.serieNowPlaying, arguments: [String(index)])) else { return }
+
         httpRequest(url: url){
             success,_,response in
             do {
@@ -136,9 +136,9 @@ extension Connector {
         }
     }
     
-    func getSeriePopular(completion: @escaping (_ success: Bool, _ response: [Item]) -> ()){
-        guard let url = URL(string: Endpoints.seriePopular) else { return }
-        
+    func getSeriePopular(index: Int, completion: @escaping (_ success: Bool, _ response: [Item]) -> ()){
+        guard let url = URL(string: String(format: Endpoints.seriePopular, arguments: [String(index)])) else { return }
+
         httpRequest(url: url){
             success,_,response in
             do {

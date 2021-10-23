@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    var refreshControl = UIRefreshControl()
 
     var isUpdatingMoviePlaying: Bool = false
     var isUpdatingMoviePopular: Bool = false
@@ -74,6 +75,15 @@ class ViewController: UIViewController {
         self.title = "Ejercicio técnico"
         retreiveLocalData()
         retreiveAllData()
+        
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshData()
+    {
+        refreshControl.endRefreshing()
+        retreiveAllData()
     }
     
     private func bind(){
@@ -94,10 +104,6 @@ class ViewController: UIViewController {
                     case .SeriePopular:
                         self?.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
                         self?.isUpdatingSeriePopular = false
-                }
-                
-                if(!(self?.isUpdating() ?? true)){
-                    self?.tableView.isScrollEnabled = true
                 }
             }
         }
@@ -131,16 +137,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
             routeToDetail(type: type, item: viewModel.seriePlayingNow[at.row])
         case .SeriePopular:
             routeToDetail(type: type, item: viewModel.seriePopular[at.row])
-        }
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentYoffset = scrollView.contentOffset.y
-      
-        if contentYoffset < -145 && !isUpdating() {
-            scrollView.isScrollEnabled = false
-            retreiveAllData()
-            print(contentYoffset)
         }
     }
     

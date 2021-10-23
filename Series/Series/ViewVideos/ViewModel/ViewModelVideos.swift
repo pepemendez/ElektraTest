@@ -34,6 +34,13 @@ class ViewModelVideos{
     
     func storeLocalData(itemId: Int, data: [Video]){
         let realm = try! Realm()
+        
+        let previousObjects = realm.objects(PeristedVideoList.self)
+        
+        try! realm.write{
+            realm.delete(previousObjects)
+        }
+        
         data.forEach({
             item in
             let persisted = PeristedVideoList()

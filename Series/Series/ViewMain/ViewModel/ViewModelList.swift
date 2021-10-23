@@ -39,7 +39,7 @@ class ViewModelList{
     func retreiveLocalData(type: ItemType) -> [Item]{
         let realm = try! Realm()
         var ids = [Int]()
-        let persisted = realm.objects(PeristedList.self).filter("type == \(ItemType.MoviePlaying.rawValue)")
+        let persisted = realm.objects(PeristedList.self).filter("type == \(type.rawValue)")
         persisted.forEach { item in
             print(item.id)
             ids.append(item.id)
@@ -52,6 +52,13 @@ class ViewModelList{
     
     func storeLocalData(type: ItemType, data: [Item]){
         let realm = try! Realm()
+        
+        let previousObjects = realm.objects(PeristedList.self)
+        
+        try! realm.write{
+            realm.delete(previousObjects)
+        }
+        
         data.forEach({
             item in
             let persisted = PeristedList()

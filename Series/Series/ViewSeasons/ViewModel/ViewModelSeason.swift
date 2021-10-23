@@ -34,6 +34,13 @@ class ViewModelSeason{
     
     func storeLocalData(itemId: Int, data: [Season]){
         let realm = try! Realm()
+        
+        let previousObjects = realm.objects(PeristedSeasonList.self)
+        
+        try! realm.write{
+            realm.delete(previousObjects)
+        }
+        
         data.forEach({
             item in
             let persisted = PeristedSeasonList()

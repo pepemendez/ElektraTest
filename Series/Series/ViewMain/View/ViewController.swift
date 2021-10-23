@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var isUpdating: Bool = false
     var viewModel = ViewModelList()
     
     override func viewDidLoad() {
@@ -21,20 +22,27 @@ class ViewController: UIViewController {
         bind()
         
     }
+    
+    private func retreiveAllData(){
+        self.isUpdating = true
+        
+        self.viewModel.retreiveDataList(type: .MoviePlaying)
+        self.viewModel.retreiveDataList(type: .MoviePopular)
+        self.viewModel.retreiveDataList(type: .SeriePlaying)
+        self.viewModel.retreiveDataList(type: .SeriePopular)
+    }
 
     private func configureView(){
         self.title = "Ejercicio técnico"
         
-        viewModel.retreiveDataList(type: .MoviePlaying)
-        viewModel.retreiveDataList(type: .MoviePopular)
-        viewModel.retreiveDataList(type: .SeriePlaying)
-        viewModel.retreiveDataList(type: .SeriePopular)
+        retreiveAllData()
     }
     
     private func bind(){
         viewModel.refreshData = {
             [weak self] () in
             DispatchQueue.main.async {
+                self?.isUpdating = false
                 self?.tableView.setContentOffset(.zero, animated: true)
                 self?.tableView.reloadData()
             }
@@ -56,6 +64,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
             routeToDetail(type: type, item: viewModel.seriePopular[at.row])
         default:
             print("ERROR")
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentYoffset = scrollView.contentOffset.y
+      
+        if contentYoffset < -120 && !isUpdating {
+            retreiveAllData()
         }
     }
     

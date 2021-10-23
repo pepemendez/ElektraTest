@@ -39,6 +39,20 @@ class ViewModelDetail{
         return item
     }
     
+    func retreiveLocalVideoData(itemId: Int) -> [Video]{
+        let realm = try! Realm()
+        var ids = [String]()
+        let persisted = realm.objects(PeristedVideoList.self).filter("itemId == \(itemId)")
+        persisted.forEach { item in
+            print(item.id)
+            ids.append(item.id)
+        }
+        
+        let items = realm.objects(Video.self).filter("id IN %@", ids)
+        
+        return Array(items)
+    }
+    
     
     func retreiveData(type: ItemType, itemId: Int){
         switch type {
@@ -72,7 +86,7 @@ class ViewModelDetail{
         }
     }
     
-    func videosRetrived(_ success: Bool, _ response: [Video]){
+    func videosRetrived(_ success: Bool, _ response: [Video], _ itemId: Int){
         if(success){
             self.videos = response
         }

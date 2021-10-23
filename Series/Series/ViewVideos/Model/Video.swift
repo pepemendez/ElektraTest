@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Video: Codable {
-    let name: String
-    let key: String
-    let site: String
-    let type: String
-    let official: Bool
-    let published_at: String
+class Video: Object, Codable {
+    @Persisted var name: String
+    @Persisted var key: String
+    @Persisted var site: String
+    @Persisted var type: String
+    @Persisted var official: Bool
+    @Persisted var published_at: String
+    @Persisted(primaryKey: true) var id: String
 }

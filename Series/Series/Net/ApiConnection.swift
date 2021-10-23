@@ -8,7 +8,7 @@
 import Foundation
 
 extension Connector {
-    func getMovieVideos(itemId: Int,completion: @escaping (_ success: Bool, _ response: [Video]) -> ()){
+    func getMovieVideos(itemId: Int,completion: @escaping (_ success: Bool, _ response: [Video], _ itemId: Int) -> ()){
         guard let url = URL(string: String(format: Endpoints.movieVideos, arguments: [String(itemId)])) else { return }
         
         httpRequest(url: url){
@@ -16,9 +16,9 @@ extension Connector {
             do {
                 let decoder = JSONDecoder()
                 let response = try decoder.decode(ListVideos.self, from: response.data(using: .utf8)!)
-                completion(true, response.results)
+                completion(true, response.results, itemId)
             } catch let error {
-                completion(false, [])
+                completion(false, [], 0)
                 print("Ha ocurrido un error: \(error.localizedDescription)")
             }
         }
@@ -40,7 +40,7 @@ extension Connector {
         }
     }
     
-    func getSerieVideos(itemId: Int,completion: @escaping (_ success: Bool, _ response: [Video]) -> ()){
+    func getSerieVideos(itemId: Int,completion: @escaping (_ success: Bool, _ response: [Video], _ itemId: Int) -> ()){
         guard let url = URL(string: String(format: Endpoints.serieVideos, arguments: [String(itemId)])) else { return }
         
         httpRequest(url: url){
@@ -48,9 +48,9 @@ extension Connector {
             do {
                 let decoder = JSONDecoder()
                 let response = try decoder.decode(ListVideos.self, from: response.data(using: .utf8)!)
-                completion(true, response.results)
+                completion(true, response.results, itemId)
             } catch let error {
-                completion(false, [])
+                completion(false, [], 0)
                 print("Ha ocurrido un error: \(error.localizedDescription)")
             }
         }

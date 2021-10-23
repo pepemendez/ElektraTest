@@ -8,6 +8,7 @@
 import UIKit
 
 class UITableViewCellDetails: UITableViewCell {
+    @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var rate: UILabel!
     @IBOutlet weak var date: UILabel!

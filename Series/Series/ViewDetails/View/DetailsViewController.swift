@@ -104,6 +104,11 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
         case .Details:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! UITableViewCellDetails
 
+            let backdrop = object.backdrop_path ?? ""
+            let url = backdrop.isEmpty ? object.poster_path : backdrop
+          
+            cell.img.imageFromUrl(urlString: Endpoints.imagesSmall + url )
+
             if let title = object.original_title, !title.isEmpty{
                 cell.title?.text = title
             }

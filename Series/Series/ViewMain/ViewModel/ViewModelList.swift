@@ -142,6 +142,10 @@ class ViewModelList{
                 self.moviePlayingNow.append(contentsOf: response)
             }
         }
+        else{
+            //to handle the update variables
+            refreshData(.MoviePlaying)
+        }
     }
     
     func getMovieNowPlayingResponse(_ success: Bool, _ response: [Item]){
@@ -152,6 +156,10 @@ class ViewModelList{
                 self.storeLocalData(type: .MoviePlaying, data: self.moviePlayingNow)
             }
         }
+        else{
+            //to handle the update variables
+            refreshData(.MoviePlaying)
+        }
     }
     
     func appendMoviePopularResponse(_ success: Bool, _ response: [Item]){
@@ -159,6 +167,10 @@ class ViewModelList{
             DispatchQueue.main.async {
                 self.moviePopular.append(contentsOf: response)
             }
+        }
+        else{
+            //to handle the update variables
+            refreshData(.MoviePopular)
         }
     }
     
@@ -170,6 +182,10 @@ class ViewModelList{
                 self.storeLocalData(type: .MoviePopular, data: self.moviePopular)
             }
         }
+        else{
+            //to handle the update variables
+            refreshData(.MoviePopular)
+        }
     }
     
     func appendSerieNowPlayingResponse(_ success: Bool, _ response: [Item]){
@@ -177,6 +193,10 @@ class ViewModelList{
             DispatchQueue.main.async {
                 self.seriePlayingNow.append(contentsOf: response)
             }
+        }
+        else{
+            //to handle the update variables
+            refreshData(.SeriePlaying)
         }
     }
     
@@ -188,6 +208,10 @@ class ViewModelList{
                 self.storeLocalData(type: .SeriePlaying, data: self.seriePlayingNow)
             }
         }
+        else{
+            //to handle the update variables
+            refreshData(.SeriePlaying)
+        }
     }
     
     func appendSeriePopularResponse(_ success: Bool, _ response: [Item]){
@@ -195,6 +219,10 @@ class ViewModelList{
             DispatchQueue.main.async {
                 self.seriePopular.append(contentsOf: response)
             }
+        }
+        else{
+            //to handle the update variables
+            refreshData(.SeriePopular)
         }
     }
     
@@ -205,6 +233,10 @@ class ViewModelList{
 
                 self.storeLocalData(type: .SeriePopular, data: self.seriePopular)
             }
+        }
+        else{
+            //to handle the update variables
+            refreshData(.SeriePopular)
         }
     }
     

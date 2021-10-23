@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class List: Codable {
     let page: Int

@@ -37,11 +37,11 @@ class DetailsViewController: UIViewController {
     }
     
     @objc func buttonVideoAction(sender: UIButton!) {
-        routeToVideos(type: type, id: viewModel.data!.id)
+        routeToVideos(type: type, id: viewModel.data.id)
     }
     
     @objc func buttonSeasonsAction(sender: UIButton!) {
-        routeToSeasons(type: type, id: viewModel.data!.id)
+        routeToSeasons(type: type, id: viewModel.data.id)
     }
     
     
@@ -49,22 +49,12 @@ class DetailsViewController: UIViewController {
         viewModel.refreshData = {
             [weak self] () in
             DispatchQueue.main.async {
+                let backdrop = self?.viewModel.data.backdrop_path ?? ""
+                let url = backdrop.isEmpty ? self?.viewModel.data.poster_path : backdrop
+                self?.image.imageFromUrl(urlString: Endpoints.images + url! )
                 
-                if let p = self, let data = p.viewModel.data {
-                    let backdrop = data.backdrop_path ?? ""
-                    let url = backdrop.isEmpty ? data.poster_path : backdrop
-                    self?.image.imageFromUrl(urlString: Endpoints.images + url )
-                    
-                    self?.tableView.setContentOffset(.zero, animated: true)
-                    self?.tableView.reloadData()
-                    
-                    for video in p.viewModel.videos {
-                        if (video.site.lowercased() == "youtube"){
-                            print("https://www.youtube.com/watch?v=\(video.key)")
-                        }
-                    }
-
-                }
+                self?.tableView.setContentOffset(.zero, animated: true)
+                self?.tableView.reloadData()
             }
         }
     }
@@ -98,7 +88,7 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let object = viewModel.data else { return UITableViewCell()}
+        let object = viewModel.data
         let type = cellTypeForIndexPath(indexPath: indexPath)
         switch type {
         case .Details:
@@ -112,16 +102,23 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
             if let title = object.original_title, !title.isEmpty{
                 cell.title?.text = title
             }
-            if let title = object.name, !title.isEmpty{
+            else if let title = object.name, !title.isEmpty{
                 cell.title?.text = title
+            }
+            else{
+                cell.title?.text = ""
             }
             
             if let date = object.first_air_date, !date.isEmpty{
                 cell.date?.text = "\(date.prefix(4))"
             }
-            if let date = object.release_date, !date.isEmpty{
+            else if let date = object.release_date, !date.isEmpty{
                 cell.date?.text = "\(date.prefix(4))"
             }
+            else{
+                cell.date?.text = ""
+            }
+            
             if let lenght = object.runtime, lenght > 0{
                 cell.lenght?.text = "\(lenght/60)h \(lenght%60)min"
             }
@@ -134,7 +131,7 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
             
             
             let rate = "\(object.vote_average*10)"
-            cell.rate.text = "\(rate.prefix(2))%"
+            cell.rate.text = "\(rate.split(separator: ".")[0])%"
             return cell
 
         case .Watch:

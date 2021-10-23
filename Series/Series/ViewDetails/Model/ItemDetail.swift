@@ -6,21 +6,23 @@
 //
 
 import Foundation
+import RealmSwift
 
-class ItemDetail: Codable {
-    var backdrop_path: String?
-    var original_title: String?
-    var name: String?
-    let overview: String
-    let poster_path: String
-    let id: Int
-    let vote_average: Float
-    var first_air_date: String?
-    var runtime: Int?
-    var release_date: String?
-    var number_of_seasons: Int?
+class ItemDetail: Object, Codable {
+    @Persisted var backdrop_path: String?
+    @Persisted var original_title: String?
+    @Persisted var name: String?
+    @Persisted var overview: String
+    @Persisted var poster_path: String
+    @Persisted(primaryKey: true) var id: Int
+    @Persisted var vote_average: Float
+    @Persisted var first_air_date: String?
+    @Persisted var runtime: Int?
+    @Persisted var release_date: String?
+    @Persisted var number_of_seasons: Int?
     
-    init() {
+    /*override init() {
+        super.init()
         number_of_seasons = 0
         runtime = 0
         first_air_date = ""
@@ -31,5 +33,5 @@ class ItemDetail: Codable {
         overview = ""
         poster_path = ""
         id = 0
-    }
+    }*/
 }

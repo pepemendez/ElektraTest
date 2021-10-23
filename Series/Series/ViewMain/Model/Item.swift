@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Item: Codable {
-    var original_title: String?
-    var name: String?
-    var overview: String
-    var poster_path: String
-    var id: Int
+class Item: Object, Codable {
+    @Persisted var original_title: String?
+    @Persisted var name: String?
+    @Persisted var overview: String
+    @Persisted var poster_path: String
+    @Persisted(primaryKey: true) var id: Int
 }

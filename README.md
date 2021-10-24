@@ -40,7 +40,7 @@ Adicionales incluidos en el proyecto:
 Consideraciones
 <ul>
 <li>Actualmente se asume que los videos se mostrarán en YouTube, en la implementación de las pruebas unitarias
-se observó que VIMEO también aparece como site en el arreglo de videos, así que el soporte de múltiples 
+se observó que VIMEO también aparece como <code>site</code> en el arreglo de videos, así que el soporte de múltiples 
 plataformas sería adecuado. Debido a que, la documentación no clarifica las posibles fuentes de video, se considera
 que se requiere observar más detalles de series/peliculas para determinar otras posibles fuentes.</li>
 </ul>
@@ -55,7 +55,7 @@ adicional</li>
 <li>Mejorar la paleta de colores</li>
 <li>Añadir más animaciones</li>
 <li>Interfaz específica para iPad</li>
-<li>Mostrar más información, ej. genero, compañias asociadas</li>
+<li>Mostrar más información, ej. genero, compañias asociadas, páginas de streamings, etc.</li>
 </ul>
 </li>
 </ul>

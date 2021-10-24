@@ -153,7 +153,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="JcH-dl-g2h"/>
                     <connections>
+                        <outlet property="headerHeightConstraint" destination="fiy-WU-M5b" id="4Ob-L8-hRw"/>
+                        <outlet property="tableHeaderHeightConstraint" destination="cy8-Ly-Ym6" id="86z-4h-uVC"/>
                         <outlet property="tableView" destination="BQ2-Qr-viT" id="eCI-S4-jY5"/>
+                        <outlet property="titleExpanded" destination="1lR-FE-uLZ" id="PRv-lL-Ah4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

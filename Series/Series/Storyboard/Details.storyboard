@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.55000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pee-fg-l9w">
-                                <rect key="frame" x="374" y="59" width="40" height="40"/>
+                                <rect key="frame" x="374" y="59.5" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="chg-d6-OQs"/>
                                     <constraint firstAttribute="width" constant="40" id="rCW-lR-hUE"/>
@@ -174,7 +174,6 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="MainColor"/>
                         <constraints>
-                            <constraint firstItem="pee-fg-l9w" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="15" id="1uV-wU-uhs"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="pee-fg-l9w" secondAttribute="trailing" id="88C-d7-9bP"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tLa-ld-pM6" secondAttribute="trailing" id="BnU-yy-9C8"/>
                             <constraint firstItem="AR6-wB-d2C" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="60" id="Sz8-SM-zbI"/>
@@ -184,13 +183,17 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="leading" secondItem="AR6-wB-d2C" secondAttribute="leading" constant="2" id="hFA-VY-Vf1"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="AR6-wB-d2C" secondAttribute="trailing" id="pC7-PQ-oZX"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="tLa-ld-pM6" secondAttribute="bottom" id="qd7-H6-Fd9"/>
+                            <constraint firstItem="pee-fg-l9w" firstAttribute="centerY" secondItem="WhW-Yk-7dD" secondAttribute="centerY" id="rFz-lb-XfZ"/>
                             <constraint firstItem="WhW-Yk-7dD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="zTr-yc-lK2"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="close" destination="pee-fg-l9w" id="Xau-zr-dxu"/>
+                        <outlet property="headerHeightConstraint" destination="ZDG-2c-bJ5" id="FOh-f2-E2W"/>
                         <outlet property="image" destination="lrL-PL-cZT" id="ioR-CM-V4r"/>
+                        <outlet property="tableHeaderHeightConstraint" destination="Sz8-SM-zbI" id="vWv-Nl-UKQ"/>
                         <outlet property="tableView" destination="tLa-ld-pM6" id="RfE-5n-HCh"/>
+                        <outlet property="titleExpanded" destination="WhW-Yk-7dD" id="mFf-2t-128"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

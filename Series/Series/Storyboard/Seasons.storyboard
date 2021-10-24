@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.55000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84J-BU-MHM">
-                                <rect key="frame" x="374" y="59" width="40" height="40"/>
+                                <rect key="frame" x="374" y="59.5" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="8ah-W6-JRb"/>
                                     <constraint firstAttribute="height" constant="40" id="hBi-6U-KFh"/>
@@ -76,16 +76,19 @@
                             <constraint firstItem="2bc-gf-toK" firstAttribute="top" secondItem="Hj2-9M-nCm" secondAttribute="top" constant="18" id="ABJ-mG-NPv"/>
                             <constraint firstItem="Hj2-9M-nCm" firstAttribute="trailing" secondItem="84J-BU-MHM" secondAttribute="trailing" id="MPk-Xp-Nvm"/>
                             <constraint firstItem="2bc-gf-toK" firstAttribute="leading" secondItem="Hj2-9M-nCm" secondAttribute="leading" constant="20" id="NDz-gj-rZD"/>
+                            <constraint firstItem="84J-BU-MHM" firstAttribute="centerY" secondItem="2bc-gf-toK" secondAttribute="centerY" id="PnR-W0-Lbl"/>
                             <constraint firstItem="Hj2-9M-nCm" firstAttribute="bottom" secondItem="6xu-CQ-6Vd" secondAttribute="bottom" id="QOb-79-RSe"/>
                             <constraint firstItem="Hj2-9M-nCm" firstAttribute="leading" secondItem="6xu-CQ-6Vd" secondAttribute="leading" constant="2" id="VS4-x0-ff7"/>
                             <constraint firstItem="Hj2-9M-nCm" firstAttribute="trailing" secondItem="6xu-CQ-6Vd" secondAttribute="trailing" id="bAB-aj-tXK"/>
                             <constraint firstItem="6xu-CQ-6Vd" firstAttribute="top" secondItem="Hj2-9M-nCm" secondAttribute="top" constant="60" id="no6-nh-PpV"/>
-                            <constraint firstItem="84J-BU-MHM" firstAttribute="top" secondItem="Hj2-9M-nCm" secondAttribute="top" constant="15" id="ud9-0h-qVM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="close" destination="84J-BU-MHM" id="7dF-1o-ihX"/>
+                        <outlet property="headerHeightConstraint" destination="ABJ-mG-NPv" id="nZp-No-rUf"/>
+                        <outlet property="tableHeaderHeightConstraint" destination="no6-nh-PpV" id="DRd-NR-Gyn"/>
                         <outlet property="tableView" destination="6xu-CQ-6Vd" id="DGT-MW-p1R"/>
+                        <outlet property="titleExpanded" destination="2bc-gf-toK" id="dwf-eT-qiW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MRg-rz-69u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

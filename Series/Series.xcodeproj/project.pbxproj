@@ -22,6 +22,7 @@
 		3625FC86272500C100C1ECD9 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3625FC85272500C100C1ECD9 /* Messages.swift */; };
 		3625FC89272509D300C1ECD9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3625FC8B272509D300C1ECD9 /* Localizable.strings */; };
 		3648B48327237A130000FB77 /* RouterDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3648B48227237A130000FB77 /* RouterDetails.swift */; };
+		364AD63827252C320006A428 /* UIViewControllerExpandable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364AD63727252C320006A428 /* UIViewControllerExpandable.swift */; };
 		3684DDB4272289B100CC7FD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684DDB3272289B100CC7FD2 /* AppDelegate.swift */; };
 		3684DDB8272289B100CC7FD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684DDB7272289B100CC7FD2 /* ViewController.swift */; };
 		3684DDBB272289B100CC7FD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3684DDB9272289B100CC7FD2 /* Main.storyboard */; };
@@ -89,6 +90,7 @@
 		3625FC8A272509D300C1ECD9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3625FC8C27250A3E00C1ECD9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3648B48227237A130000FB77 /* RouterDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterDetails.swift; sourceTree = "<group>"; };
+		364AD63727252C320006A428 /* UIViewControllerExpandable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExpandable.swift; sourceTree = "<group>"; };
 		3684DDB0272289B000CC7FD2 /* Series.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Series.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3684DDB3272289B100CC7FD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3684DDB7272289B100CC7FD2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 		3625FC83272500A900C1ECD9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				364AD63627252C1C0006A428 /* Extensions */,
 				3625FC84272500B400C1ECD9 /* Localization */,
 			);
 			path = Other;
@@ -261,6 +264,14 @@
 				3625FC8B272509D300C1ECD9 /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		364AD63627252C1C0006A428 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				364AD63727252C320006A428 /* UIViewControllerExpandable.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		3684DDA7272289B000CC7FD2 = {
@@ -686,6 +697,7 @@
 				3684DDF527229A4400CC7FD2 /* Router.swift in Sources */,
 				3684DDEA27228EFA00CC7FD2 /* List.swift in Sources */,
 				36044EAB272392FC00C7881C /* RouterVideos.swift in Sources */,
+				364AD63827252C320006A428 /* UIViewControllerExpandable.swift in Sources */,
 				36044EA9272392A800C7881C /* VideosViewController.swift in Sources */,
 				36044EB62723C05500C7881C /* ViewModelSeason.swift in Sources */,
 				36044EBA2723C0D100C7881C /* Season.swift in Sources */,

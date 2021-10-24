@@ -7,10 +7,9 @@
 
 import UIKit
 
-class SeasonViewController: UIViewController {
+class SeasonViewController: UIViewControllerExpandable {
     
     @IBOutlet weak var close: UIButton!
-    @IBOutlet weak var tableView: UITableView!
 
     var itemId: Int!
     var type: ItemType!
@@ -48,7 +47,7 @@ class SeasonViewController: UIViewController {
 
 
 
-extension SeasonViewController: UITableViewDataSource, UITableViewDelegate{
+extension SeasonViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.data.count
     }

@@ -7,10 +7,9 @@
 
 import UIKit
 
-class VideosViewController: UIViewController {
+class VideosViewController: UIViewControllerExpandable {
     
     @IBOutlet weak var close: UIButton!
-    @IBOutlet weak var tableView: UITableView!
 
     var itemId: Int!
     var type: ItemType!
@@ -47,19 +46,24 @@ class VideosViewController: UIViewController {
 }
 
 
-extension VideosViewController: UIWebViewDelegate{
+class VideosViewControllerViewCell: UITableViewCell, UIWebViewDelegate{
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        webView.isHidden = false
+        if let wView = self.contentView.viewWithTag(1){
+            wView.isHidden = false
+        }
+        else{
+            print("ERROR")
+        }
     }
 }
 
-extension VideosViewController: UITableViewDataSource, UITableViewDelegate{
+extension VideosViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! VideosViewControllerViewCell
         
         for view in cell.contentView.subviews{
             view.removeFromSuperview()
@@ -89,6 +93,7 @@ extension VideosViewController: UITableViewDataSource, UITableViewDelegate{
         let webView = UIWebView(frame: CGRect(x:0, y:0, width: 100, height: 100))
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.inputView?.backgroundColor = .black
+        webView.tag = 1
         cell.contentView.addSubview(webView)
             
         view.addSubview(webView)
@@ -109,7 +114,7 @@ extension VideosViewController: UITableViewDataSource, UITableViewDelegate{
         webView.loadRequest(URLRequest(url: URL(string: "https://www.youtube.com/embed/\(object[indexPath.row].key)")!))
         
         webView.isHidden = true
-        webView.delegate = self
+        webView.delegate = cell
 
         
         return cell

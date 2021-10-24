@@ -7,11 +7,10 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: UIViewControllerExpandable {
     
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var close: UIButton!
-    @IBOutlet weak var tableView: UITableView!
 
     var itemId: Int!
     var type: ItemType!
@@ -67,7 +66,7 @@ class DetailsViewController: UIViewController {
 
 }
 
-extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
+extension DetailsViewController: UITableViewDataSource{
     
     enum DetailCellType {
         case Details

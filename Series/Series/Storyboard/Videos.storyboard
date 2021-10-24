@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.55000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84J-BU-MHM">
-                                <rect key="frame" x="374" y="59" width="40" height="40"/>
+                                <rect key="frame" x="374" y="59.5" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="8ah-W6-JRb"/>
                                     <constraint firstAttribute="height" constant="40" id="hBi-6U-KFh"/>
@@ -39,7 +39,7 @@
                                 <rect key="frame" x="-2" y="104" width="416" height="758"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="kuN-FA-82n">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="kuN-FA-82n" customClass="VideosViewControllerViewCell" customModule="Series" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.5" width="416" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kuN-FA-82n" id="oXw-n9-dBz">
@@ -64,12 +64,15 @@
                             <constraint firstItem="Hj2-9M-nCm" firstAttribute="leading" secondItem="6xu-CQ-6Vd" secondAttribute="leading" constant="2" id="VS4-x0-ff7"/>
                             <constraint firstItem="Hj2-9M-nCm" firstAttribute="trailing" secondItem="6xu-CQ-6Vd" secondAttribute="trailing" id="bAB-aj-tXK"/>
                             <constraint firstItem="6xu-CQ-6Vd" firstAttribute="top" secondItem="Hj2-9M-nCm" secondAttribute="top" constant="60" id="no6-nh-PpV"/>
-                            <constraint firstItem="84J-BU-MHM" firstAttribute="top" secondItem="Hj2-9M-nCm" secondAttribute="top" constant="15" id="ud9-0h-qVM"/>
+                            <constraint firstItem="84J-BU-MHM" firstAttribute="centerY" secondItem="2bc-gf-toK" secondAttribute="centerY" id="sEG-Ge-gno"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="close" destination="84J-BU-MHM" id="7dF-1o-ihX"/>
+                        <outlet property="headerHeightConstraint" destination="ABJ-mG-NPv" id="oRP-lQ-Cbv"/>
+                        <outlet property="tableHeaderHeightConstraint" destination="no6-nh-PpV" id="B0c-zF-Rpq"/>
                         <outlet property="tableView" destination="6xu-CQ-6Vd" id="DGT-MW-p1R"/>
+                        <outlet property="titleExpanded" destination="2bc-gf-toK" id="Kkq-3G-Dn5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MRg-rz-69u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

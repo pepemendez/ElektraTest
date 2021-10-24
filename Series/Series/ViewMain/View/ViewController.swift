@@ -7,9 +7,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewControllerExpandable {
     
-    @IBOutlet weak var tableView: UITableView!
     var refreshControl = UIRefreshControl()
 
     var isUpdatingMoviePlaying: Bool = false
@@ -121,7 +120,7 @@ extension UICollectionView {
     }
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableViewCellMainListDelegate{
+extension ViewController: UITableViewDataSource, UITableViewCellMainListDelegate{
     func fetchMore(type: ItemType) {
         if(!isUpdating()){
             retreiveMoreData(type: type)

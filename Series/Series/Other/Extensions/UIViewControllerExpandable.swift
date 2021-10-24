@@ -34,7 +34,7 @@ class UIViewControllerExpandable: UIViewController, UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //print("scrollViewDidScroll")
-        print(scrollView.contentOffset.y)
+        //print(scrollView.contentOffset.y)
         if(scrollView.contentOffset.y <= -20){
             return
         }

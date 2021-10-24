@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 class VideosViewController: UIViewControllerExpandable {
     
@@ -46,8 +47,8 @@ class VideosViewController: UIViewControllerExpandable {
 }
 
 
-class VideosViewControllerViewCell: UITableViewCell, UIWebViewDelegate{
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+class VideosViewControllerViewCell: UITableViewCell, WKNavigationDelegate{
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if let wView = self.contentView.viewWithTag(1){
             wView.isHidden = false
         }
@@ -90,7 +91,7 @@ extension VideosViewController: UITableViewDataSource{
         view.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -7).isActive = true
         
         
-        let webView = UIWebView(frame: CGRect(x:0, y:0, width: 100, height: 100))
+        let webView = WKWebView(frame: CGRect(x:0, y:0, width: 100, height: 100))
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.inputView?.backgroundColor = .black
         webView.tag = 1
@@ -111,10 +112,10 @@ extension VideosViewController: UITableViewDataSource{
         label.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -7).isActive = true
         
         
-        webView.loadRequest(URLRequest(url: URL(string: "https://www.youtube.com/embed/\(object[indexPath.row].key)")!))
+        webView.load(URLRequest(url: URL(string: "https://www.youtube.com/embed/\(object[indexPath.row].key)")!))
         
         webView.isHidden = true
-        webView.delegate = cell
+        webView.navigationDelegate = cell
 
         
         return cell

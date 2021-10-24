@@ -90,7 +90,7 @@ class ViewController: UIViewController {
         viewModel.refreshData = {
             [weak self] type in
             DispatchQueue.main.async {
-                
+                if #available(iOS 13.0, *) {} else{ UIView.setAnimationsEnabled(false)}
                 switch type{
                     case .MoviePlaying:
                         self?.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .fade)
@@ -105,6 +105,7 @@ class ViewController: UIViewController {
                         self?.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
                         self?.isUpdatingSeriePopular = false
                 }
+                if #available(iOS 13.0, *) {} else{ UIView.setAnimationsEnabled(true) }
             }
         }
     }

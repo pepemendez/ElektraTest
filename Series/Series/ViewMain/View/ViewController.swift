@@ -72,7 +72,7 @@ class ViewController: UIViewController {
     }
 
     private func configureView(){
-        self.title = "Ejercicio técnico"
+        self.title = Messages.TITLE.localized
         retreiveLocalData()
         retreiveAllData()
         
@@ -153,22 +153,22 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
         
         switch indexPath.row {
         case 0:
-            cell.titleLabel.text = "Series Playing Now"
+            cell.titleLabel.text = Messages.SERIES_PLAYING.localized
             cell.data = viewModel.seriePlayingNow
             cell.type = .SeriePlaying
             cell.delegate = self
         case 1:
-            cell.titleLabel.text = "Series Most Popular"
+            cell.titleLabel.text = Messages.SERIES_POPULAR.localized
             cell.data = viewModel.seriePopular
             cell.type = .SeriePopular
             cell.delegate = self
         case 2:
-            cell.titleLabel.text = "Movies Playing Now"
+            cell.titleLabel.text = Messages.MOVIES_PLAYING.localized
             cell.data = viewModel.moviePlayingNow
             cell.type = .MoviePlaying
             cell.delegate = self
         case 3:
-            cell.titleLabel.text = "Movies Most Popular"
+            cell.titleLabel.text = Messages.MOVIES_POPULAR.localized
             cell.data = viewModel.moviePopular
             cell.type = .MoviePopular
             cell.delegate = self

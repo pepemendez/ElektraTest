@@ -26,7 +26,7 @@ class VideosViewController: UIViewController {
     }
 
     private func configureView(){
-        self.title = "Ejercicio técnico"
+        self.title = Messages.TITLE.localized
         viewModel.retreiveData(type: type, itemId: itemId)
         self.close.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }

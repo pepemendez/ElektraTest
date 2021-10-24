@@ -19,6 +19,8 @@
 		36044EBA2723C0D100C7881C /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36044EB92723C0D100C7881C /* Season.swift */; };
 		36044EBC2723C26E00C7881C /* RouteSeasons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36044EBB2723C26E00C7881C /* RouteSeasons.swift */; };
 		36044EBE2723DC1700C7881C /* StoredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36044EBD2723DC1700C7881C /* StoredList.swift */; };
+		3625FC86272500C100C1ECD9 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3625FC85272500C100C1ECD9 /* Messages.swift */; };
+		3625FC882725024B00C1ECD9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3625FC872725024B00C1ECD9 /* Localizable.strings */; };
 		3648B48327237A130000FB77 /* RouterDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3648B48227237A130000FB77 /* RouterDetails.swift */; };
 		3684DDB4272289B100CC7FD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684DDB3272289B100CC7FD2 /* AppDelegate.swift */; };
 		3684DDB8272289B100CC7FD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3684DDB7272289B100CC7FD2 /* ViewController.swift */; };
@@ -83,6 +85,8 @@
 		36044EB92723C0D100C7881C /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		36044EBB2723C26E00C7881C /* RouteSeasons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSeasons.swift; sourceTree = "<group>"; };
 		36044EBD2723DC1700C7881C /* StoredList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredList.swift; sourceTree = "<group>"; };
+		3625FC85272500C100C1ECD9 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		3625FC872725024B00C1ECD9 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		3648B48227237A130000FB77 /* RouterDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterDetails.swift; sourceTree = "<group>"; };
 		3684DDB0272289B000CC7FD2 /* Series.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Series.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3684DDB3272289B100CC7FD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -241,6 +245,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		3625FC83272500A900C1ECD9 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				3625FC84272500B400C1ECD9 /* Localization */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		3625FC84272500B400C1ECD9 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				3625FC85272500C100C1ECD9 /* Messages.swift */,
+				3625FC872725024B00C1ECD9 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		3684DDA7272289B000CC7FD2 = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +287,7 @@
 		3684DDB2272289B000CC7FD2 /* Series */ = {
 			isa = PBXGroup;
 			children = (
+				3625FC83272500A900C1ECD9 /* Other */,
 				36044E9F272390FA00C7881C /* Storyboard */,
 				3684DDEF2722975D00CC7FD2 /* Net */,
 				3684DDE527228CA700CC7FD2 /* ViewMain */,
@@ -519,6 +541,7 @@
 				3684DDC0272289B200CC7FD2 /* LaunchScreen.storyboard in Resources */,
 				3684DDBD272289B200CC7FD2 /* Assets.xcassets in Resources */,
 				3684DDBB272289B100CC7FD2 /* Main.storyboard in Resources */,
+				3625FC882725024B00C1ECD9 /* Localizable.strings in Resources */,
 				36044EAE2723BF6C00C7881C /* Seasons.storyboard in Resources */,
 				36044EA12723912F00C7881C /* Videos.storyboard in Resources */,
 				3684DDF727229AFE00CC7FD2 /* Details.storyboard in Resources */,
@@ -677,6 +700,7 @@
 				36044E9E2723848B00C7881C /* UITableViewCellDetails.swift in Sources */,
 				3684DE092722AD4700CC7FD2 /* Video.swift in Sources */,
 				3684DE0D27235AE400CC7FD2 /* UICollectionViewCell.swift in Sources */,
+				3625FC86272500C100C1ECD9 /* Messages.swift in Sources */,
 				3684DE0B272358C000CC7FD2 /* UITableViewCellMainList.swift in Sources */,
 				3684DDE427228C0100CC7FD2 /* SceneDelegate.swift in Sources */,
 				36044EA52723924900C7881C /* ViewModelVideos.swift in Sources */,

@@ -27,7 +27,7 @@ class DetailsViewController: UIViewController {
     }
 
     private func configureView(){
-        self.title = "Ejercicio técnico"
+        self.title = Messages.TITLE.localized
         viewModel.retreiveData(type: type, itemId: itemId)
         self.close.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }
@@ -132,10 +132,11 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
             }
             
             if let lenght = object.runtime, lenght > 0{
-                cell.lenght?.text = "\(lenght/60)h \(lenght%60)min"
+                cell.lenght?.text =
+                    Messages.MOVIE_LENGHT.localized.localize(with: "\(lenght/60)", "\(lenght%60)")
             }
             else if let seasons = object.number_of_seasons, seasons > 0{
-                cell.lenght?.text = "\(seasons) seasons"
+                cell.lenght?.text = Messages.SEASONS_LENGHT.localized.localize(with: "\(seasons)")
             }
             else{
                 cell.lenght?.text = " "
@@ -156,7 +157,7 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
             button.translatesAutoresizingMaskIntoConstraints = false
             button.layer.cornerRadius = 8
             button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-            button.setTitle("  Watch", for: .normal)
+            button.setTitle(Messages.WATCH.localized, for: .normal)
             button.setImage(#imageLiteral(resourceName: "play-circle-outline"), for: .normal)
             button.imageView?.tintColor = .white
             button.setTitleColor(.gray, for: .disabled)
@@ -181,7 +182,7 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
             button.translatesAutoresizingMaskIntoConstraints = false
             button.layer.cornerRadius = 8
             button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-            button.setTitle("  Seasons", for: .normal)
+            button.setTitle(Messages.SEASONS.localized, for: .normal)
             button.setImage(#imageLiteral(resourceName: "television"), for: .normal)
             button.imageView?.tintColor = .white
             

@@ -26,7 +26,7 @@ class SeasonViewController: UIViewController {
     }
 
     private func configureView(){
-        self.title = "Ejercicio técnico"
+        self.title = Messages.TITLE.localized
         viewModel.retreiveData(type: type, itemId: itemId)
         self.close.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }
@@ -61,7 +61,8 @@ extension SeasonViewController: UITableViewDataSource, UITableViewDelegate{
         cell.textLabel?.text = object.name
         let date = object.air_date ?? ""
         let prefix = date.count > 1 ? "\(date.prefix(4)) - " : ""
-        let episodes = object.episode_count > 0 ? "\(object.episode_count) episodes" : "Information not available"
+        let episodes = object.episode_count > 0 ?
+            Messages.EPISODES.localized.localize(with: "\(object.episode_count)") : Messages.INFO_NOT_AVAILABLE.localized
         cell.detailTextLabel?.text = "\(prefix)\(episodes)"
   
         return cell

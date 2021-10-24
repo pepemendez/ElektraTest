@@ -43,6 +43,7 @@ Consideraciones
 se observó que VIMEO también aparece como <code>site</code> en el arreglo de videos, así que el soporte de múltiples 
 plataformas sería adecuado. Debido a que, la documentación no clarifica las posibles fuentes de video, se considera
 que se requiere observar más detalles de series/peliculas para determinar otras posibles fuentes.</li>
+<li>Actualmente pocas series ofrecen videos en español, una de las que sí tienen es la serie The Good Doctor, si se requieren más pruebas con los videos, se sugiere probar con la aplicación en idioma inglés</li>
 </ul>
 
 Opcionales que me gustaría implementar

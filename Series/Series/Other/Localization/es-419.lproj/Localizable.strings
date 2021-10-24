@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  Series
+
+  Created by Jose Mendez on 23/10/21.
+  
+*/
+
+"SERIES_PLAYING" = "Series recientes";
+"SERIES_POPULAR" = "Series más populares";
+"MOVIES_PLAYING" = "Peliculas recientes";
+"MOVIES_POPULAR" = "Peliculas más populares";
+"MOVIE_LENGHT" = "%@h %@min";
+"SEASONS_LENGHT" = "%@ temporadas";
+"WATCH" = "  Ver";
+"SEASONS" = "  Temporadas";
+"INFO_NOT_AVAILABLE" = "Información no disponible";
+"EPISODES" = "%@ capítulos";
+"LANG" = "es-MX";

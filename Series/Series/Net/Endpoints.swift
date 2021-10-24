@@ -27,35 +27,35 @@ struct Endpoints{
     }
     
     public static var movieNowPlaying: String {
-        return domain + "movie/now_playing?api_key=" + API_KEY + "&language=en-US&page=%@"
+        return domain + "movie/now_playing?api_key=" + API_KEY + "&language=" + Messages.LANG.localized + "&page=%@"
     }
     
     public static var moviePopular: String {
-        return domain + "movie/popular?api_key=" + API_KEY + "&language=en-US&page=%@"
+        return domain + "movie/popular?api_key=" + API_KEY + "&language=" + Messages.LANG.localized + "&page=%@"
     }
     
     public static var movieDetails: String {
-        return domain + "movie/%@?api_key=" + API_KEY + "&language=en-US"
+        return domain + "movie/%@?api_key=" + API_KEY + "&language=" + Messages.LANG.localized
     }
     
     public static var movieVideos: String {
-        return domain + "movie/%@/videos?api_key=" + API_KEY + "&language=en-US"
+        return domain + "movie/%@/videos?api_key=" + API_KEY + "&language=" + Messages.LANG.localized
     }
     
     public static var serieDetails: String {
-        return domain + "tv/%@?api_key=" + API_KEY + "&language=en-US"
+        return domain + "tv/%@?api_key=" + API_KEY + "&language=" + Messages.LANG.localized
     }
     
     public static var serieVideos: String {
-        return domain + "tv/%@/videos?api_key=" + API_KEY + "&language=en-US"
+        return domain + "tv/%@/videos?api_key=" + API_KEY + "&language=" + Messages.LANG.localized
     }
     
     public static var serieNowPlaying: String {
-        return domain + "tv/on_the_air?api_key=" + API_KEY + "&language=en-US&page=%@"
+        return domain + "tv/on_the_air?api_key=" + API_KEY + "&language=" + Messages.LANG.localized + "page=%@"
     }
     
     public static var seriePopular: String {
-        return domain + "tv/popular?api_key=" + API_KEY + "&language=en-US&page=%@"
+        return domain + "tv/popular?api_key=" + API_KEY + "&language=" + Messages.LANG.localized + "&page=%@"
     }
     
 }

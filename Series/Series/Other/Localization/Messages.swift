@@ -19,6 +19,7 @@ enum Messages: String {
     case SEASONS_LENGHT
     case WATCH
     case INFO_NOT_AVAILABLE
+    case LANG
     
     var localized: String {
         return rawValue.localized

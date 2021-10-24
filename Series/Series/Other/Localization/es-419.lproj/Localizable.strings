@@ -8,8 +8,8 @@
 
 "SERIES_PLAYING" = "Series recientes";
 "SERIES_POPULAR" = "Series más populares";
-"MOVIES_PLAYING" = "Peliculas recientes";
-"MOVIES_POPULAR" = "Peliculas más populares";
+"MOVIES_PLAYING" = "Películas recientes";
+"MOVIES_POPULAR" = "Películas más populares";
 "MOVIE_LENGHT" = "%@h %@min";
 "SEASONS_LENGHT" = "%@ temporadas";
 "WATCH" = "  Ver";

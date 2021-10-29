@@ -57,7 +57,7 @@ class ViewModelList{
     func storeLocalData(type: ItemType, data: [Item]){
         let realm = try! Realm()
         
-        let previousObjects = realm.objects(PeristedList.self)
+        let previousObjects = realm.objects(PeristedList.self).filter("type == \(type.rawValue)")
         
         try! realm.write{
             realm.delete(previousObjects)

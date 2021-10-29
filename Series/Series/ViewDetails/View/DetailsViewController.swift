@@ -27,7 +27,10 @@ class DetailsViewController: UIViewControllerExpandable {
 
     private func configureView(){
         self.title = Messages.TITLE.localized
+        viewModel.retreiveLocalData(itemId: itemId)
+        viewModel.retreiveLocalVideoData(itemId: itemId)
         viewModel.retreiveData(type: type, itemId: itemId)
+        viewModel.retreiveVideoData(type: type, itemId: itemId)
         self.close.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }
     

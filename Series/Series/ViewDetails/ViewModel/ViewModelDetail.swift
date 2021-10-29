@@ -28,18 +28,23 @@ class ViewModelDetail{
         let realm = try! Realm()
         
         try! realm.write {
-            realm.add(data, update: .all
-            )
+            realm.add(data, update: .all)
         }
     }
     
-    func retreiveLocalData(itemId: Int) -> ItemDetail?{
+    func fetchLocalData(itemId: Int) -> ItemDetail?{
         let realm = try! Realm()
         let item = realm.objects(ItemDetail.self).filter("id == \(itemId)").first
         return item
     }
     
-    func retreiveLocalVideoData(itemId: Int) -> [Video]{
+    func retreiveLocalData(itemId: Int){
+        if let item = fetchLocalData(itemId: itemId){
+            dataRetrived(true, item)
+        }
+    }
+    
+    func fetchLocalVideoData(itemId: Int) -> [Video]{
         let realm = try! Realm()
         var ids = [String]()
         let persisted = realm.objects(PeristedVideoList.self).filter("itemId == \(itemId)")
@@ -52,23 +57,38 @@ class ViewModelDetail{
         return Array(items)
     }
     
+    func retreiveLocalVideoData(itemId: Int){
+        videosRetrived(true, fetchLocalVideoData(itemId: itemId), itemId)
+    }
+    
+    func retreiveVideoData(type: ItemType, itemId: Int){
+        switch type {
+        case .MoviePlaying, .MoviePopular:
+            Connector().getMovieVideos(itemId: itemId, completion: videosRetrived)
+        break
+        case .SeriePopular, .SeriePlaying:
+            Connector().getSerieVideos(itemId: itemId, completion: videosRetrived)
+        break
+        }
+
+    }
     
     func retreiveData(type: ItemType, itemId: Int){
         switch type {
         case .MoviePlaying, .MoviePopular:
-            if let item = retreiveLocalData(itemId: itemId){
+            /*if let item = retreiveLocalData(itemId: itemId){
                 dataRetrived(true, item)
             }
             videosRetrived(true, retreiveLocalVideoData(itemId: itemId), itemId)
-            Connector().getMovieVideos(itemId: itemId, completion: videosRetrived)
+            Connector().getMovieVideos(itemId: itemId, completion: videosRetrived)*/
             Connector().getMovieDetails(itemId: itemId, completion: dataRetrived)
         break
         case .SeriePopular, .SeriePlaying:
-            if let item = retreiveLocalData(itemId: itemId){
+            /*if let item = retreiveLocalData(itemId: itemId){
                 dataRetrived(true, item)
             }
             videosRetrived(true, retreiveLocalVideoData(itemId: itemId), itemId)
-            Connector().getSerieVideos(itemId: itemId, completion: videosRetrived)
+            Connector().getSerieVideos(itemId: itemId, completion: videosRetrived)*/
             Connector().getSerieDetails(itemId: itemId, completion: dataRetrived)
         break
         }

@@ -10,12 +10,182 @@ import XCTest
 
 class SeriesTests: XCTestCase {
 
+    let model = ViewModelList()
+    
+    override func setUp(){
+        let expectation = self.expectation(description: "Waiting to fetch")
+    
+        let group = DispatchGroup()
+        
+        for type in [.MoviePlaying, ItemType.MoviePopular, .SeriePlaying, .SeriePopular] {
+            group.enter()
+            model.retreiveDataList(type: type)
+            
+            for _ in 1...50 {
+                group.enter()
+                model.retreiveMoreDataList(type: type)
+            }
+        }
+
+        model.refreshData = {
+            _ in
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            print(#function)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 60) { error in
+            /*print("moviePlayingNow", self.model.moviePlayingNow.count)
+            print("moviePlayingNowIndex", self.model.moviePlayingNowIndex)
+            
+            print("moviePopular", self.model.moviePopular.count)
+            print("moviePopularIndex", self.model.moviePopularIndex)
+
+            print("seriePlayingNow", self.model.seriePlayingNow.count)
+            print("seriePlayingNowIndex", self.model.seriePlayingNowIndex)
+
+            print("seriePopular", self.model.seriePopular.count)
+            print("seriePopularIndex", self.model.seriePopularIndex)*/
+        }
+    }
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+    
+    //We just want to test we can at least parse our data
+    func testMoviePlaying() throws {
+        print(#function)
+        let expectation = self.expectation(description: "Waiting to fetch")
+        expectation.assertForOverFulfill = false
+    
+        let group = DispatchGroup()
+        
+        var details = [ViewModelDetail]()
+
+        for item in model.moviePlayingNow{
+            let detail = ViewModelDetail()
+            group.enter()
+            detail.retreiveData(type: .MoviePlaying, itemId: item.id)
+            
+            detail.refreshData = {
+                group.leave()
+            }
+            
+            details.append(detail)
+        }
+
+
+        group.notify(queue: .main) {
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 25) { error in
+            XCTAssertNil(error)
+            print(details.count)
+        }
+    }
+    
+    func testMoviePopular() throws {
+        print(#function)
+        let expectation = self.expectation(description: "Waiting to fetch")
+        expectation.assertForOverFulfill = false
+    
+        let group = DispatchGroup()
+        
+        var details = [ViewModelDetail]()
+
+        for item in model.moviePopular{
+            let detail = ViewModelDetail()
+            group.enter()
+            detail.retreiveData(type: .MoviePopular, itemId: item.id)
+            
+            detail.refreshData = {
+                group.leave()
+            }
+            
+            details.append(detail)
+        }
+
+
+        group.notify(queue: .main) {
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 25) { error in
+            XCTAssertNil(error)
+            print(details.count)
+        }
+    }
+    
+    func testSeriePlaying() throws {
+        print(#function)
+        let expectation = self.expectation(description: "Waiting to fetch")
+        expectation.assertForOverFulfill = false
+    
+        let group = DispatchGroup()
+        
+        var details = [ViewModelDetail]()
+
+        for item in model.seriePlayingNow{
+            let detail = ViewModelDetail()
+            group.enter()
+            detail.retreiveData(type: .SeriePlaying, itemId: item.id)
+            
+            detail.refreshData = {
+                group.leave()
+            }
+            
+            details.append(detail)
+        }
+
+
+        group.notify(queue: .main) {
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 25) { error in
+            XCTAssertNil(error)
+            print(details.count)
+        }
+    }
+    
+    func testSeriePopular() throws {
+        print(#function)
+        let expectation = self.expectation(description: "Waiting to fetch")
+        expectation.assertForOverFulfill = false
+    
+        let group = DispatchGroup()
+        
+        var details = [ViewModelDetail]()
+
+        for item in model.seriePopular{
+            let detail = ViewModelDetail()
+            group.enter()
+            detail.retreiveData(type: .SeriePopular, itemId: item.id)
+            
+            detail.refreshData = {
+                group.leave()
+            }
+            
+            details.append(detail)
+        }
+
+
+        group.notify(queue: .main) {
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 25) { error in
+            XCTAssertNil(error)
+            print(details.count)
+        }
     }
 
     //We wanted to know if all videos came from Youtube, Short answer: NO
@@ -71,193 +241,5 @@ class SeriesTests: XCTestCase {
             print("\totalVideos \(totalvideos.count)")
         }
     }*/
-    
-    //We just want to test we can at least parse our data
-    func testMoviePlaying() throws {
-        let model = ViewModelList()
-        let expectation = self.expectation(description: "Waiting to fetch")
-        expectation.expectedFulfillmentCount = 500
-        expectation.assertForOverFulfill = false
-        model.retreiveDataList(type: .MoviePlaying)
-        for _ in 1...49 {
-            model.retreiveMoreDataList(type: .MoviePlaying)
-        }
-        
-        var currentCount = 0
-        var totalCount = 0
-        
-        model.refreshData = {
-            _ in
-            expectation.fulfill()
-            
-            currentCount = currentCount + 1
-            
-            if(currentCount == 50){
-                model.moviePlayingNow.forEach{
-                    item in
 
-                    let detail = ViewModelDetail()
-
-                    detail.retreiveData(type: .MoviePlaying, itemId: item.id)
-                    
-                    detail.refreshData = {
-                        [weak self] () in
-                        expectation.fulfill()
-                        totalCount = totalCount + 1
-                    }
-                }
-            }
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-                XCTAssertNil(error)
-            print(model.moviePlayingNow.count)
-            print(model.moviePlayingNowIndex)
-            print(totalCount)
-        }
-    }
-
-    //We just want to test we can at least parse our data
-    func testMoviePopular() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        let model = ViewModelList()
-        let expectation = self.expectation(description: "Waiting to fetch")
-        expectation.expectedFulfillmentCount = 500
-        expectation.assertForOverFulfill = false
-        model.retreiveDataList(type: .MoviePopular)
-        for _ in 1...49 {
-            model.retreiveMoreDataList(type: .MoviePopular)
-        }
-        
-        var currentCount = 0
-        var totalCount = 0
-        
-        model.refreshData = {
-            _ in
-            expectation.fulfill()
-            
-            currentCount = currentCount + 1
-            
-            if(currentCount == 50){
-                model.moviePopular.forEach{
-                    item in
-
-                    let detail = ViewModelDetail()
-
-                    detail.retreiveData(type: .MoviePopular, itemId: item.id)
-                    
-                    detail.refreshData = {
-                        [weak self] () in
-                        expectation.fulfill()
-                        totalCount = totalCount + 1
-                    }
-                }
-            }
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-                XCTAssertNil(error)
-            print(model.moviePopular.count)
-            print(model.moviePopularIndex)
-            print(totalCount)
-        }
-    }
-
-    //We just want to test we can at least parse our data
-    func testSeriePlaying() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        let model = ViewModelList()
-        let expectation = self.expectation(description: "Waiting to fetch")
-        expectation.expectedFulfillmentCount = 500
-        expectation.assertForOverFulfill = false
-        model.retreiveDataList(type: .SeriePlaying)
-        for _ in 1...49 {
-            model.retreiveMoreDataList(type: .SeriePlaying)
-        }
-        
-        var currentCount = 0
-        var totalCount = 0
-        
-        model.refreshData = {
-            _ in
-            expectation.fulfill()
-            
-            currentCount = currentCount + 1
-            
-            if(currentCount == 50){
-                model.seriePlayingNow.forEach{
-                    item in
-
-                    let detail = ViewModelDetail()
-
-                    detail.retreiveData(type: .SeriePlaying, itemId: item.id)
-                    
-                    detail.refreshData = {
-                        [weak self] () in
-                        expectation.fulfill()
-                        totalCount = totalCount + 1
-                    }
-                }
-            }
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-                XCTAssertNil(error)
-            print(model.seriePlayingNow.count)
-            print(model.seriePlayingNowIndex)
-            print(totalCount)
-        }
-    }
-    
-    //We just want to test we can at least parse our data
-    func testSeriePopular() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        let model = ViewModelList()
-        let expectation = self.expectation(description: "Waiting to fetch")
-        expectation.expectedFulfillmentCount = 500
-        expectation.assertForOverFulfill = false
-        model.retreiveDataList(type: .SeriePopular)
-        for _ in 1...49 {
-            model.retreiveMoreDataList(type: .SeriePopular)
-        }
-        
-        var currentCount = 0
-        var totalCount = 0
-        
-        model.refreshData = {
-            _ in
-            expectation.fulfill()
-            
-            currentCount = currentCount + 1
-            
-            if(currentCount == 50){
-                model.seriePopular.forEach{
-                    item in
-
-                    let detail = ViewModelDetail()
-
-                    detail.retreiveData(type: .SeriePopular, itemId: item.id)
-                    
-                    detail.refreshData = {
-                        [weak self] () in
-                        expectation.fulfill()
-                        totalCount = totalCount + 1
-                    }
-                }
-            }
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-                XCTAssertNil(error)
-            print(model.seriePopular.count)
-            print(model.seriePopularIndex)
-            print(totalCount)
-        }
-    }
 }
